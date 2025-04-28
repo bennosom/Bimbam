@@ -1,4 +1,4 @@
-package io.engst.bimbam
+package io.engst.bimbam.core
 
 import android.util.Log
 

@@ -4,15 +4,13 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
-import androidx.compose.material3.Card
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.key
@@ -26,7 +24,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
-import io.engst.bimbam.AlarmScheduler
+import io.engst.bimbam.model.AlarmScheduler
 import io.engst.bimbam.ui.theme.BimbamTheme
 import java.util.Locale
 
@@ -34,9 +32,9 @@ import java.util.Locale
 @Composable
 fun AlarmSettings(modifier: Modifier = Modifier) {
   Column(
-    modifier = modifier.fillMaxSize(),
+    modifier = modifier,
     horizontalAlignment = Alignment.CenterHorizontally,
-    verticalArrangement = Arrangement.SpaceEvenly,
+    verticalArrangement = Arrangement.spacedBy(8.dp),
   ) {
     val context = LocalContext.current
     val scheduler = remember { AlarmScheduler(context) }
@@ -46,28 +44,25 @@ fun AlarmSettings(modifier: Modifier = Modifier) {
       color = MaterialTheme.colorScheme.onSurface,
     )
     var message by remember { mutableStateOf("Move, Breathe, Relax") }
-    TextField(
-      value = message,
-      onValueChange = { message = it },
-    )
+    OutlinedTextField(value = message, onValueChange = { message = it })
+    Spacer(Modifier.padding(8.dp))
     Text(
       "every".uppercase(Locale.getDefault()),
       style = MaterialTheme.typography.titleLarge,
       color = MaterialTheme.colorScheme.onSurface,
     )
-
     var everyMinutes by remember { mutableIntStateOf(60) }
-    Card {
-      FlowRow(modifier = Modifier.padding(8.dp), horizontalArrangement = Arrangement.Center) {
-        listOf(2, 5, 10, 15, 30, 45, 60, 90, 120).forEach {
-          key(it) {
-            FilterChip(
-              modifier = Modifier.padding(4.dp),
-              onClick = { everyMinutes = it },
-              label = { Text("$it ${if (it == 1) "minute" else "minutes"}") },
-              selected = everyMinutes == it,
-            )
-          }
+    FlowRow(
+      horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally),
+      verticalArrangement = Arrangement.spacedBy(0.dp),
+    ) {
+      listOf(2, 5, 10, 15, 30, 45, 60, 90, 120).forEach {
+        key(it) {
+          FilterChip(
+            onClick = { everyMinutes = it },
+            label = { Text("$it ${if (it == 1) "minute" else "minutes"}") },
+            selected = everyMinutes == it,
+          )
         }
       }
     }

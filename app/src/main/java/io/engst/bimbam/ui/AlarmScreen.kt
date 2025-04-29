@@ -1,5 +1,6 @@
 package io.engst.bimbam.ui
 
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -8,12 +9,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
-import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -25,21 +26,29 @@ fun AlarmClock(
   modifier: Modifier = Modifier,
   onNext: () -> Unit,
   onDismiss: () -> Unit = {},
+  onSilent: () -> Unit = {},
 ) {
   Column(
-    modifier = modifier.fillMaxSize().padding(16.dp),
+    modifier =
+      modifier
+        .fillMaxSize()
+        .padding(16.dp)
+        .pointerInput(Unit) { detectTapGestures { onSilent() } },
     horizontalAlignment = Alignment.CenterHorizontally,
     verticalArrangement = Arrangement.spacedBy(16.dp),
   ) {
-    Card(modifier = Modifier.fillMaxWidth().weight(2f)) {
-      Text(
-        modifier = Modifier.fillMaxWidth().weight(2f).wrapContentHeight(Alignment.CenterVertically),
-        style = MaterialTheme.typography.headlineLarge.copy(textAlign = TextAlign.Center),
-        text = message,
-      )
-    }
+    Text(
+      modifier = Modifier
+        .fillMaxWidth()
+        .weight(2f)
+        .wrapContentHeight(Alignment.CenterVertically),
+      style = MaterialTheme.typography.headlineLarge.copy(textAlign = TextAlign.Center),
+      text = message,
+    )
     Button(
-      modifier = Modifier.fillMaxWidth().weight(1f),
+      modifier = Modifier
+        .fillMaxWidth()
+        .weight(1f),
       shape = RoundedCornerShape(32.dp),
       onClick = { onNext() },
     ) {
@@ -49,10 +58,9 @@ fun AlarmClock(
         text = "Next",
       )
     }
-    Button(
-      modifier = Modifier.fillMaxWidth().weight(1f),
-      onClick = { onDismiss() },
-    ) {
+    Button(modifier = Modifier
+      .fillMaxWidth()
+      .weight(1f), onClick = { onDismiss() }) {
       Text(
         style = MaterialTheme.typography.headlineMedium,
         textAlign = TextAlign.Center,

@@ -41,7 +41,6 @@
         <service
             android:name="AlarmService"
             android:directBootAware="true"
-            android:enabled="true"
             android:exported="true"
             android:foregroundServiceType="specialUse"
             android:permission="bimbam.permission" />
@@ -49,9 +48,7 @@
         <activity
             android:name=".AlarmActivity"
             android:directBootAware="true"
-            android:enabled="true"
             android:excludeFromRecents="true"
-            android:exported="true"
             android:showForAllUsers="true"
             android:showWhenLocked="true"
             android:turnScreenOn="true" />

@@ -97,8 +97,7 @@ class AlarmService : Service() {
     // Build the full-screen notification
     val notification =
       NotificationCompat.Builder(this, "alarm_service_channel")
-        .setContentTitle("Alarm Triggered")
-        .setContentText(message)
+        .setContentTitle(message)
         .setSmallIcon(R.drawable.baseline_3d_rotation_24) // Replace with your app's icon
         .addAction(R.drawable.baseline_3d_rotation_24, "Next", nextPendingIntent) // Add next action
         .addAction(R.drawable.baseline_3d_rotation_24, "Stop", stopPendingIntent) // Add stop action

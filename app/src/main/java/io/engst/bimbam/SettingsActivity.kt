@@ -4,9 +4,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
@@ -23,10 +22,13 @@ class SettingsActivity : ComponentActivity() {
     enableEdgeToEdge()
     setContent {
       BimbamTheme {
-        Surface(shape = MaterialTheme.shapes.medium) {
-          AlarmSettings(modifier = Modifier
-            .verticalScroll(rememberScrollState())
-            .padding(8.dp))
+        Surface(
+          shape = MaterialTheme.shapes.medium,
+          modifier = Modifier
+            .padding(vertical = 8.dp)
+            .imePadding()
+        ) {
+          AlarmSettings(modifier = Modifier.padding(horizontal = 16.dp))
         }
       }
     }

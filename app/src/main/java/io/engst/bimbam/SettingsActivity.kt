@@ -7,7 +7,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Card
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import io.engst.bimbam.ui.AlarmSettings
@@ -22,7 +23,7 @@ class SettingsActivity : ComponentActivity() {
     enableEdgeToEdge()
     setContent {
       BimbamTheme {
-        Card {
+        Surface(shape = MaterialTheme.shapes.medium) {
           AlarmSettings(modifier = Modifier
             .verticalScroll(rememberScrollState())
             .padding(8.dp))

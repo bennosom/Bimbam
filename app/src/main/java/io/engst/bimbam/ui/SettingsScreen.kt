@@ -32,7 +32,7 @@ import java.util.Locale
 @Composable
 fun AlarmSettings(modifier: Modifier = Modifier) {
   Column(
-    modifier = modifier,
+    modifier = modifier.padding(16.dp),
     horizontalAlignment = Alignment.CenterHorizontally,
     verticalArrangement = Arrangement.spacedBy(8.dp),
   ) {
